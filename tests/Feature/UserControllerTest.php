@@ -13,4 +13,18 @@ class UserControllerTest extends TestCase
         $this->get('/login')
             ->assertSeeText('Login');
     }
+
+    public function testUserPasswordKosong(){
+        $this->post('/login', [])
+            ->assertSeeText('User dan password tidak boleh kosong !');
+    }
+
+    public function testUserPasswordSalah()
+    {
+        $this->post('/login', [
+            'user' => 'Salah',
+            'password' => 'Salah'
+        ])
+            ->assertSeeText('Password / Password Salah !');
+    }
 }
