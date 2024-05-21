@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 class UserController extends Controller
@@ -31,26 +32,26 @@ class UserController extends Controller
         if(empty($user) || empty($password)){
             return response()
                 ->view('user.login', [
-                    'title' => 'Login Management',
+                    'title' => 'Login | Lara Todo App',
                     'error' => 'User dan password tidak boleh kosong !'
                 ]);
         }
 
         if($this->userService->login($user, $password)){
             $request->session()->put('user', $user);
-            return response()
-                ->view('/');
+            return redirect('/');
         }
 
         return response()
             ->view('user.login', [
-                'title' => 'Login Management',
-                'error' => 'Password / Password Salah !'
+                'title' => 'Login | Lara Todo App',
+                'error' => 'Username atau Password Salah !'
             ]);
     }
 
-    public function logout()
+    public function logout(Request $request): RedirectResponse
     {
-
+        $request->session()->forget('user');
+        return redirect('/');
     }
 }
