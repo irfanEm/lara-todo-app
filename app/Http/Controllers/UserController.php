@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         return response()
             ->view('user.login', [
-                "title" => "Login Management"
+                "title" => "Login | Lara Todo App"
             ]);
     }
 

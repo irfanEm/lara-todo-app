@@ -18,6 +18,11 @@ class UserServiceTest extends TestCase
         $this->userService = $this->app->make(UserService::class);
     }
 
+    public function testUserServiceNotNull()
+    {
+        self::assertNotNull($this->userService);
+    }
+
     public function testLoginSuccess()
     {
         self::assertTrue($this->userService->login("irfanem", "irfan2711"));
